@@ -57,17 +57,23 @@ class CountryData
   end
 
   def self.all_countries_not_in_europe
-    result = DatabaseConnection.query('SELECT * FROM countries WHERE continent =\'South America\' ORDER BY gni ASC LIMIT 1 OFFSET 2;')
+    result = DatabaseConnection.query('SELECT * FROM countries WHERE continent !=\'Europe\';')
     result.map { |country| CountryData.new(country['name'], country['continent'], country['population'], country['density'], country['gni']) }
   end
 
   def self.all_data_country_name_and_population_only
+    result = DatabaseConnection.query('SELECT name,population FROM countries;')
+    result.map { |country| CountryData.new(country['name'], country['continent'], country['population'], country['density'], country['gni']) }
   end
 
   def self.south_american_countries_hide_population
+    result = DatabaseConnection.query('SELECT name,continent,density,gni FROM countries WHERE continent =\'South America\';')
+    result.map { |country| CountryData.new(country['name'], country['continent'], country['population'], country['density'], country['gni']) }
   end
 
   def self.countries_not_in_asia_hide_gni_per_capita_and_population_density
+    result = DatabaseConnection.query('SELECT name,continent,population FROM countries WHERE continent !=\'Asia\';')
+    result.map { |country| CountryData.new(country['name'], country['continent'], country['population'], country['density'], country['gni']) }
   end
 end
 
