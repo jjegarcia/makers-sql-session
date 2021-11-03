@@ -75,5 +75,11 @@ class CountryData
     result = DatabaseConnection.query('SELECT name,continent,population FROM countries WHERE continent !=\'Asia\';')
     result.map { |country| CountryData.new(country['name'], country['continent'], country['population'], country['density'], country['gni']) }
   end
+
+  def self.add_test
+    result = DatabaseConnection.query('SELECT name,continent,population FROM countries WHERE continent !=\'Asia\';')
+    result.map { |country| CountryData.new(country['name'], country['continent'], country['population'], country['density'], country['gni']) }
+  end
+
 end
 

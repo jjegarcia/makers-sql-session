@@ -72,5 +72,10 @@ class CountryDataApp < Sinatra::Base
     erb :display
   end
 
+  get '/add_test' do
+    @data = CountryData.add_test
+    erb :display
+  end
+
   run! if app_file == $0
 end
